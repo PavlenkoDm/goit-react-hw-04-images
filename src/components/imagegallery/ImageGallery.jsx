@@ -1,7 +1,6 @@
 import { ImageGalleryItem } from 'components/index'
 
-export const ImageGallery = props => {
-    const { arrToRender, imageClick } = props;
+export const ImageGallery = ({ arrToRender, imageClick }) => {
     return (
         <ul className="ImageGallery">
             {arrToRender.map(obj => {
