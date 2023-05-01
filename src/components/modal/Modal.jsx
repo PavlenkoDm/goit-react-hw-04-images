@@ -17,7 +17,7 @@ export function Modal({ modalImageData, closeModal, escCloseModal }) {
     const handleOverlayClick = event => {
         if (event.target !== event.currentTarget) return;
 
-        closeModal();
+        return closeModal();
     };
 
     return createPortal(

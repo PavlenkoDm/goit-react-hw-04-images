@@ -5,13 +5,13 @@ export function SearchBar({ onSubmit }) {
 
     const handleInputChange = event => {
         const { value } = event.currentTarget;
-        setSearchInput(value);
+        return setSearchInput(value);
     };
 
     const handleSubmit = event => {
         event.preventDefault();
         onSubmit(searchInput);
-        setSearchInput('');
+        return setSearchInput('');
     };
 
     return (
