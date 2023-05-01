@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { SearchBar } from 'components/index';
@@ -75,21 +75,21 @@ export function App() {
 
     const handleLoadMoreBtnClick = event => {
         if (event.target !== event.currentTarget) return;
-        setCurrentPage(prevPage => prevPage + 1);
+        return setCurrentPage(prevPage => prevPage + 1);
     };
 
     const handleImageClick = data => {
         if (!data) return;
-        setOpenModalData(data);
+        return setOpenModalData(data);
     };
 
     const handleModalClose = () => {
-        setOpenModalData(null);
+        return setOpenModalData(null);
     };
 
     const onEscCloseModal = event => {
         if (event.code !== 'Escape') return;
-        handleModalClose();
+        return handleModalClose();
     };
 
     const isButtonVisible = !isLoading && minimizedResponse.length < totalItems;
