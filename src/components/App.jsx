@@ -100,7 +100,7 @@ export function App() {
             <ImageGallery
                 arrToRender={minimizedResponse}
                 imageClick={handleImageClick}
-            ></ImageGallery>
+            />
             {isButtonVisible && <Button onClick={handleLoadMoreBtnClick} />}
             {error && <p>{error}</p>}
             {openModalData && (
