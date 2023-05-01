@@ -24,7 +24,9 @@ export function App() {
             try {
                 Loading.arrows();
                 setIsLoading(true);
+
                 const { total, hits } = await getImagesFromApi(urlOptions);
+
                 if (total === 0) {
                     Report.failure(
                         'Ooops',
@@ -35,6 +37,7 @@ export function App() {
                     Loading.remove();
                     return;
                 }
+
                 const minimizedHits = hits.map(item => {
                     const { id, largeImageURL, webformatURL, tags } = item;
                     return {
@@ -45,22 +48,21 @@ export function App() {
                     };
                 });
 
-                setIsLoading(false);
                 setTotalItems(total);
                 setMinimizedResponse(prevResponse => {
                     return [...prevResponse, ...minimizedHits];
                 });
 
-                Loading.remove();
             } catch (error) {
-                Loading.remove();
+                setError(error.massage);
+                
+            } finally {
                 setIsLoading(false);
-                setError(error.massage );
+                Loading.remove();
             }
         }
 
         fetchFromApi();
-
     }, [searchInputSubmit, currentPage]);
 
     const handleSearchSubmit = searchValue => {
@@ -73,8 +75,7 @@ export function App() {
         setError('');
     };
 
-    const handleLoadMoreBtnClick = event => {
-        if (event.target !== event.currentTarget) return;
+    const handleLoadMoreBtnClick = () => {
         return setCurrentPage(prevPage => prevPage + 1);
     };
 
@@ -85,11 +86,6 @@ export function App() {
 
     const handleModalClose = () => {
         return setOpenModalData(null);
-    };
-
-    const onEscCloseModal = event => {
-        if (event.code !== 'Escape') return;
-        return handleModalClose();
     };
 
     const isButtonVisible = !isLoading && minimizedResponse.length < totalItems;
@@ -107,7 +103,6 @@ export function App() {
                 <Modal
                     modalImageData={openModalData}
                     closeModal={handleModalClose}
-                    escCloseModal={onEscCloseModal}
                 />
             )}
         </div>

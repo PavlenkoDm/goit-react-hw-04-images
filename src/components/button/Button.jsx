@@ -4,7 +4,7 @@ export const Button = ({ onClick }) => {
             <button
                 className="Button"
                 type="button"
-                onClick={event => onClick(event)}
+                onClick={onClick}
             >
                 Load more
             </button>
